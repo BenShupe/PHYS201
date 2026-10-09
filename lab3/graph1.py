@@ -12,8 +12,8 @@ def fit_equation(x, a, b):
     return a * x**b
 
 # Fit a power equation to the datapoints since that is what the graph follows
-(b , a) = np.polyfit(np.log10(x), np.log10(y))
-a=10**a
+(b , a) = np.polyfit(np.log(x), np.log(y), 1)
+a=np.exp(a)
 b=b
 x_fit = np.linspace(min(x), max(x), 3000)
 y_fit = fit_equation(x_fit, a, b)
@@ -64,7 +64,7 @@ axes.xaxis.set_major_formatter(ticker.ScalarFormatter())
 axes.yaxis.set_major_locator(ticker.MultipleLocator(10))
 axes.yaxis.set_major_formatter(ticker.ScalarFormatter())
 
-plt.plot(x_fit, y_fit, color="red", linestyle="-", linewidth=1.5, label=f'$y={b:.4f}x+{np.log10(a):.4f}$')
+plt.plot(x_fit, y_fit, color="red", linestyle="-", linewidth=1.5, label=f'$y={np.log(b):.4f}x+{a:4f}$')
 plt.plot(max_x, y_max_fit, '--', color='gray', label=f'Maxline: $y={b_max:.4f}x+{np.log10(a_max):.4f}$')
 plt.plot(min_x, y_min_fit, '--', color='gray', label=f'Minline: $y={b_min:.4f}x+{np.log10(a_min):.4f}$')
 
